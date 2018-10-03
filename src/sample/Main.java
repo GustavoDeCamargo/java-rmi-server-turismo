@@ -6,6 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Main extends Application {
 
     @Override
@@ -14,6 +20,17 @@ public class Main extends Application {
         primaryStage.setTitle("Servidor RMI");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+
+        try {
+            Registry sn = LocateRegistry.createRegistry(1099);
+
+            sn.bind("god", new ServeImpl());
+
+
+            // TODO code application logic here
+        } catch (RemoteException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 
