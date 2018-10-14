@@ -25,5 +25,6 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ{
         System.out.println("Servidor recebeu o request = " + string);
         cli.echo(string);
     }
-    
+
+
 }

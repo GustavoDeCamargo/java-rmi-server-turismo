@@ -12,14 +12,33 @@ import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class Main extends Application {
+
+    private static Stage stage;
+
+    private static Scene Servidor;
+    private static Scene Configurar;
+    private static Scene sample;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-      //  Parent root = FXMLLoader.load(getClass().getResource("Servidor.fxml"));
-      //  primaryStage.setTitle("Servidor RMI");
-      //  primaryStage.setScene(new Scene(root, 300, 275));
-       // primaryStage.show();
+        stage = primaryStage;
+
+        primaryStage.setTitle("Configuração SD01");
+
+        Parent fxmlConfigurar = FXMLLoader.load(getClass().getResource("/sample/Configurar.fxml"));
+        Configurar = new Scene(fxmlConfigurar);
+
+        Parent fxmlServidor = FXMLLoader.load(getClass().getResource("/sample/Servidor.fxml"));
+        Servidor = new Scene(fxmlServidor);
+
+
+        primaryStage.setTitle("Sistemas Recursos Compartilhados");
+        primaryStage.setScene(Configurar);
+        primaryStage.show();
+
+
         DBConnection db = new DBConnection();
         db.connect();
 
@@ -35,6 +54,16 @@ public class Main extends Application {
         }
     }
 
+    public static void changeScreen(String scr) {
+        switch (scr) {
+            case "Servidor":
+                stage.setScene(Servidor);
+                break;
+            case "sample":
+                stage.setScene(sample);
+                break;
+        }
+    }
 
     public static void main(String[] args) {
         launch(args);
