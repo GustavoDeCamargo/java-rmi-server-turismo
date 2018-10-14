@@ -22,7 +22,7 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ{
     
     @Override
     public void chamar(String string, InterfaceCli cli)throws RemoteException {
-        System.out.println("Servidor recebeu o request");
+        System.out.println("Servidor recebeu o request = " + string);
         cli.echo(string);
     }
     

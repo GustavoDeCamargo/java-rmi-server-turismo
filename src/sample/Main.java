@@ -16,10 +16,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Servidor.fxml"));
-        primaryStage.setTitle("Servidor RMI");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
+      //  Parent root = FXMLLoader.load(getClass().getResource("Servidor.fxml"));
+      //  primaryStage.setTitle("Servidor RMI");
+      //  primaryStage.setScene(new Scene(root, 300, 275));
+       // primaryStage.show();
+        DBConnection db = new DBConnection();
+        db.connect();
 
         try {
             Registry sn = LocateRegistry.createRegistry(1099);
