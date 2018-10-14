@@ -1,6 +1,9 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.database.DBConnection;
 import sample.database.ManagerQuery;
@@ -17,13 +20,27 @@ import java.util.logging.Logger;
 public class Main extends Application {
 
     public static Registry SERVICONOMES;
+    private static Stage stage;
+
+    private static Scene Servidor;
+    private static Scene Configurar;
+    private static Scene sample;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-       // Parent root = FXMLLoader.load(getClass().getResource("resources/Servidor.fxml"));
-       // primaryStage.setTitle("Servidor RMI");
-       // primaryStage.setScene(new Scene(root, 300, 275));
-       // primaryStage.show();
+        stage = primaryStage;
+
+        primaryStage.setTitle("Configuração SD01");
+
+        Parent fxmlConfigurar = FXMLLoader.load(getClass().getResource("resources/Configurar.fxml"));
+        Configurar = new Scene(fxmlConfigurar);
+
+        Parent fxmlServidor = FXMLLoader.load(getClass().getResource("resources/Servidor.fxml"));
+        Servidor = new Scene(fxmlServidor);
+
+        primaryStage.setTitle("Sistemas Recursos Compartilhados");
+        primaryStage.setScene(Configurar);
+        primaryStage.show();
         DBConnection db = new DBConnection();
         db.connect();
         Repository repository = new Repository();
@@ -44,5 +61,16 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void changeScreen(String scr) {
+        switch (scr) {
+            case "Servidor":
+                stage.setScene(Servidor);
+                break;
+            case "sample":
+                stage.setScene(sample);
+                break;
+        }
     }
 }

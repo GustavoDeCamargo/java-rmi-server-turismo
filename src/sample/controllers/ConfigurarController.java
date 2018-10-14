@@ -1,4 +1,4 @@
-package sample; /**
+package sample.controllers; /**
  * Sample Skeleton for 'Configurar.fxml' Controller Class
  */
 
@@ -6,6 +6,7 @@ import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import sample.Main;
 
 import javax.swing.*;
 
