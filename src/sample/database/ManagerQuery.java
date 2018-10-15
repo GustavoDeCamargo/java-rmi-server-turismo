@@ -40,4 +40,23 @@ public class ManagerQuery {
         return "SELECT id FROM cidades WHERE nome = '" + nome + "';";
     }
 
+
+    public String insertInteresse(String nome_cliente, Integer ref_cliente, Integer tipo_interesse,
+                                  Integer origem, Integer destino, Double preco_maximo) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("INSERT INTO interesses(nome_cliente,ref_cliente," +
+                "tipo_interesse,destino,origem,preco_maximo) VALUES (");
+        stringBuilder.append("'" + nome_cliente + "',");
+        stringBuilder.append("" + ref_cliente + ",");
+        stringBuilder.append("" + tipo_interesse + ",");
+        stringBuilder.append("" + origem + ",");
+        stringBuilder.append("" + destino + ",");
+        stringBuilder.append("" + preco_maximo + ");");
+        return stringBuilder.toString();
+    }
+
+    public String getIDServicoNomesPeloNome(String nome)
+    {
+        return "SELECT id FROM servico_nomes WHERE nome = '" + nome + "';";
+    }
 }

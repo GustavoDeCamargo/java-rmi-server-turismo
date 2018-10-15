@@ -74,7 +74,6 @@ public class ConfigurarController {
                 Date.valueOf(dataVoltaPicker.getValue()));
 
         appManager.getAeroManager().cadastrarVoo(voo);
-
     }
 
     public void cadastrarHospedagem (){

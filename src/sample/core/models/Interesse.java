@@ -15,6 +15,15 @@ public class Interesse {
     private Double preco_maximo;
 
 
+    public Interesse(String nome_cliente, String ref_cliente, Integer tipo_interesse, String origem, String destino, Double preco_maximo) {
+        this.nome_cliente = nome_cliente;
+        this.ref_cliente = ref_cliente;
+        this.tipo_interesse = tipo_interesse;
+        this.origem = origem;
+        this.destino = destino;
+        this.preco_maximo = preco_maximo;
+    }
+
     public Integer getId() {
         return id;
     }
