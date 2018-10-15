@@ -5,17 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.database.DBConnection;
-import sample.database.ManagerQuery;
-import sample.database.Repository;
-import sample.rmi.ServeImpl;
 
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Main extends Application {
     private static Stage stage;
@@ -24,10 +14,12 @@ public class Main extends Application {
     private static Scene Configurar;
     private static Scene sample;
 
-    private static AppManager appManager;
+    public static AppManager appManager;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        appManager = new AppManager();
+        appManager.start();
         stage = primaryStage;
 
         primaryStage.setTitle("Configuração SD01");
@@ -41,8 +33,6 @@ public class Main extends Application {
         primaryStage.setTitle("Sistemas Recursos Compartilhados");
         primaryStage.setScene(Configurar);
         primaryStage.show();
-        appManager = new AppManager();
-        appManager.start();
     }
 
 

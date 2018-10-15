@@ -13,5 +13,10 @@ public class ManagerQuery {
         return strb.toString();
     }
 
+    public String getAllCidades()
+    {
+        return "SELECT nome from cidades;";
+    }
+
 
 }
