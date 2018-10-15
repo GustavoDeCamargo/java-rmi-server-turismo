@@ -54,5 +54,14 @@ public class ConfigurarController {
 //            new Simulador(false).start();
 //        }
     }
+
+    public void cadastrarVoo (){
+
+    }
+
+    public void cadastrarHospedagem (){
+
+    }
+
 }
 

@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="482.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ConfigurarController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="482.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ConfigurarController">
    <children>
       <Text layoutX="137.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastrar Eventos">
          <font>
@@ -17,16 +17,18 @@
          </font>
       </Text>
       <Separator layoutX="35.0" layoutY="71.0" prefHeight="1.0" prefWidth="415.0" />
-      <JFXButton layoutX="35.0" layoutY="383.0" prefHeight="36.0" prefWidth="177.0" style="-fx-background-color: #5a5a5a;" text="Cadastrar Voo" textFill="WHITE" />
-      <JFXButton layoutX="266.0" layoutY="263.0" prefHeight="36.0" prefWidth="177.0" style="-fx-background-color: #5a5a5a;" text="Cadastrar Hospedagem" textFill="WHITE" />
-      <JFXTextField layoutX="266.0" layoutY="151.0" prefHeight="25.0" prefWidth="177.0" promptText="Hotel" />
-      <JFXTextField layoutX="35.0" layoutY="209.0" prefHeight="25.0" prefWidth="177.0" promptText="Preço" />
-      <JFXTextField layoutX="266.0" layoutY="209.0" prefHeight="25.0" prefWidth="177.0" promptText="Preço" text="Preço Diária" />
-      <JFXDatePicker layoutX="33.0" layoutY="267.0" prefHeight="28.0" prefWidth="191.0" promptText="Data Ida" />
-      <JFXDatePicker layoutX="33.0" layoutY="321.0" prefHeight="28.0" prefWidth="191.0" promptText="Data Volta" />
-      <JFXButton layoutX="266.0" layoutY="313.0" onAction="#changeScreen" prefHeight="106.0" prefWidth="177.0" style="-fx-background-color: #00ff00;" text="Encerrar Cadastros" />
+      <JFXButton fx:id="botaoCadastrarVoo" layoutX="33.0" layoutY="430.0" onAction="#cadastrarVoo" prefHeight="36.0" prefWidth="177.0" style="-fx-background-color: #5a5a5a;" text="Cadastrar Voo" textFill="WHITE" />
+      <JFXButton fx:id="botaoCadastrarHospedagem" layoutX="268.0" layoutY="321.0" onAction="#cadastrarHospedagem" prefHeight="36.0" prefWidth="177.0" style="-fx-background-color: #5a5a5a;" text="Cadastrar Hospedagem" textFill="WHITE" />
+      <JFXTextField fx:id="hotel" layoutX="266.0" layoutY="151.0" prefHeight="25.0" prefWidth="177.0" promptText="Hotel" />
+      <JFXTextField fx:id="precoVoo" layoutX="35.0" layoutY="209.0" prefHeight="25.0" prefWidth="177.0" promptText="Preço" />
+      <JFXTextField fx:id="precoDiaria" layoutX="266.0" layoutY="209.0" prefHeight="25.0" prefWidth="177.0" promptText="Preço" text="Preço Diária" />
+      <JFXDatePicker fx:id="dataIdaPicker" layoutX="33.0" layoutY="267.0" prefHeight="28.0" prefWidth="191.0" promptText="Data Ida" />
+      <JFXDatePicker fx:id="dataVoltaPicker" layoutX="33.0" layoutY="321.0" prefHeight="28.0" prefWidth="191.0" promptText="Data Volta" />
+      <JFXButton fx:id="botaoEncerrarCadastros" layoutX="268.0" layoutY="371.0" onAction="#changeScreen" prefHeight="106.0" prefWidth="177.0" style="-fx-background-color: #00ff00;" text="Encerrar Cadastros" />
       <JFXComboBox fx:id="voo_origem_box" layoutX="40.0" layoutY="96.0" prefHeight="25.0" prefWidth="177.0" promptText="Origem" />
       <JFXComboBox fx:id="hotel_destino_box" layoutX="266.0" layoutY="96.0" prefHeight="25.0" prefWidth="177.0" promptText="Destino" />
       <JFXComboBox fx:id="voo_destino_box" layoutX="35.0" layoutY="151.0" prefHeight="25.0" prefWidth="177.0" promptText="Destino" />
+      <JFXTextField fx:id="capacidadeVoo" layoutX="33.0" layoutY="377.0" prefHeight="25.0" prefWidth="177.0" promptText="Capacidade" />
+      <JFXTextField fx:id="capacidadeHotel" layoutX="266.0" layoutY="269.0" prefHeight="25.0" prefWidth="177.0" promptText="Vagas" />
    </children>
 </AnchorPane>
