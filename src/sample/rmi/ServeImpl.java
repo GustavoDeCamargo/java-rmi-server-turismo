@@ -17,7 +17,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static sample.Main.SERVICONOMES;
+import static sample.rmi.RMIManager.SERVICONOMES;
+
 
 /**
  *

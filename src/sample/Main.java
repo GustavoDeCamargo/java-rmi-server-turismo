@@ -18,13 +18,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Main extends Application {
-
-    public static Registry SERVICONOMES;
     private static Stage stage;
 
     private static Scene Servidor;
     private static Scene Configurar;
     private static Scene sample;
+
+    private static AppManager appManager;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -41,21 +41,8 @@ public class Main extends Application {
         primaryStage.setTitle("Sistemas Recursos Compartilhados");
         primaryStage.setScene(Configurar);
         primaryStage.show();
-        DBConnection db = new DBConnection();
-        db.connect();
-        Repository repository = new Repository();
-        ManagerQuery mquery = new ManagerQuery();
-        System.out.println(mquery.registrar_SN("batata"));
-      //  ResultSet rs = repository.executeQuery();
-       // System.out.println(rs.getString("nome"));
-        try {
-            SERVICONOMES = LocateRegistry.createRegistry(1099);
-            SERVICONOMES.bind("Servidor", new ServeImpl());
-            repository.start_sn();
-            repository.executeUpdate(mquery.registrar_SN("Servidor"));
-        } catch (RemoteException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        appManager = new AppManager();
+        appManager.start();
     }
 
 
