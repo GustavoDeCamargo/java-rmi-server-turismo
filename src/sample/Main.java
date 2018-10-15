@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.core.models.Voo;
 
 
 public class Main extends Application {
@@ -20,6 +21,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         appManager = new AppManager();
         appManager.start();
+        Voo voo = new Voo("Voo 001","São Paulo","Curitiba",200);
+        appManager.getAeroManager().cadastrarVoo(voo);
         stage = primaryStage;
 
         primaryStage.setTitle("Configuração SD01");

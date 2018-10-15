@@ -7,6 +7,13 @@ public class Voo {
     private Integer capacidade;
 
 
+    public Voo(String nome, String origem, String destino, Integer capacidade) {
+        this.nome = nome;
+        this.origem = origem;
+        this.destino = destino;
+        this.capacidade = capacidade;
+    }
+
     public String getNome() {
         return nome;
     }
