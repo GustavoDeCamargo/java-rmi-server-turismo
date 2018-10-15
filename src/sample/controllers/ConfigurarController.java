@@ -4,16 +4,20 @@ package sample.controllers; /**
 
 import java.net.URL;
 import java.security.GeneralSecurityException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import sample.AppManager;
 import sample.Main;
+import sample.core.models.Voo;
 
 import javax.swing.*;
 
@@ -29,6 +33,12 @@ public class ConfigurarController {
 
     @FXML
     private JFXComboBox<String> voo_origem_box,hotel_destino_box,voo_destino_box;
+
+    @FXML
+    private JFXTextField precoVoo,precoDiaria,hotel,capacidadeVoo,capacidadeHotel;
+
+    @FXML
+    private JFXDatePicker dataIdaPicker,dataVoltaPicker;
 
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -55,7 +65,15 @@ public class ConfigurarController {
 //        }
     }
 
-    public void cadastrarVoo (){
+    public void cadastrarVoo () throws SQLException {
+        Voo voo = new Voo("AQK232",
+                voo_origem_box.getValue(),
+                voo_destino_box.getValue(),
+                Integer.parseInt(capacidadeVoo.getText()),
+                Date.valueOf(dataIdaPicker.getValue()),
+                Date.valueOf(dataVoltaPicker.getValue()));
+
+        appManager.getAeroManager().cadastrarVoo(voo);
 
     }
 

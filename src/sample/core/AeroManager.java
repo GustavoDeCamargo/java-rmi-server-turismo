@@ -18,7 +18,7 @@ public class AeroManager {
     public void cadastrarVoo(Voo voo) throws SQLException {
         Integer origem = repository.executeQuery(mquery.getIDCidadePeloNome(voo.getOrigem())).getInt("id");
         Integer destino = repository.executeQuery(mquery.getIDCidadePeloNome(voo.getDestino())).getInt("id");
-        String sql = mquery.cadastrarVoo(voo.getNome(),origem,destino,voo.getCapacidade());
+        String sql = mquery.cadastrarVoo(voo.getNome(),origem,destino,voo.getCapacidade(),voo.getData_ida(),voo.getData_volta());
         repository.executeUpdate(sql);
     }
 }
