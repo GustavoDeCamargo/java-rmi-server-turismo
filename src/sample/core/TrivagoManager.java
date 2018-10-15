@@ -1,5 +1,7 @@
 package sample.core;
 
+import sample.core.models.Hospedagem;
+import sample.core.models.Voo;
 import sample.database.ManagerQuery;
 import sample.database.Repository;
 
@@ -30,4 +32,9 @@ public class TrivagoManager {
         return cidades;
     }
 
+    public void cadastrarHospedagem(Hospedagem hospedagem) throws SQLException {
+        Integer destino = repository.executeQuery(mquery.getIDCidadePeloNome(hospedagem.getDestino())).getInt("id");
+        String sql = mquery.cadastrarHospedagem(hospedagem.getHotel(),destino,hospedagem.getNumero_pessoas(),hospedagem.getPreco());
+        repository.executeUpdate(sql);
+    }
 }

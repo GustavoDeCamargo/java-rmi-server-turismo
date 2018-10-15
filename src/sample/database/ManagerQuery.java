@@ -1,6 +1,8 @@
 package sample.database;
 
 
+import sample.core.models.Hotel;
+
 import java.util.Date;
 
 // Implementa as funções que montam as querys
@@ -58,5 +60,15 @@ public class ManagerQuery {
     public String getIDServicoNomesPeloNome(String nome)
     {
         return "SELECT id FROM servico_nomes WHERE nome = '" + nome + "';";
+    }
+    public String cadastrarHospedagem(String hotel, Integer destino, Integer numero_pessoas, Integer preco) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("INSERT INTO hoteis(nome,local,vagas,ocupacao) VALUES (");
+        stringBuilder.append("'" + hotel + "',");
+        stringBuilder.append("'" + destino + "',");
+        stringBuilder.append("" + numero_pessoas + ",");
+        stringBuilder.append("" + preco + ");");
+
+        return stringBuilder.toString();
     }
 }

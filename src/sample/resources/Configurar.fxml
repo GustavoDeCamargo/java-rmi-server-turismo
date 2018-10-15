@@ -28,7 +28,7 @@
          </cursor></JFXButton>
       <JFXTextField fx:id="hotel" layoutX="266.0" layoutY="151.0" prefHeight="25.0" prefWidth="177.0" promptText="Hotel" />
       <JFXTextField fx:id="precoVoo" layoutX="35.0" layoutY="209.0" prefHeight="25.0" prefWidth="177.0" promptText="Preço" />
-      <JFXTextField fx:id="precoDiaria" layoutX="266.0" layoutY="209.0" prefHeight="25.0" prefWidth="177.0" promptText="Preço" text="Preço Diária" />
+      <JFXTextField fx:id="precoDiaria" layoutX="266.0" layoutY="209.0" prefHeight="25.0" prefWidth="177.0" promptText="Preço Diaria" />
       <JFXDatePicker fx:id="dataIdaPicker" layoutX="33.0" layoutY="267.0" prefHeight="28.0" prefWidth="191.0" promptText="Data Ida" />
       <JFXDatePicker fx:id="dataVoltaPicker" layoutX="33.0" layoutY="321.0" prefHeight="28.0" prefWidth="191.0" promptText="Data Volta" />
       <JFXButton fx:id="botaoEncerrarCadastros" layoutX="268.0" layoutY="374.0" onAction="#changeScreen" prefHeight="143.0" prefWidth="177.0" style="-fx-background-color: #00ff00;" text="Encerrar Cadastros">

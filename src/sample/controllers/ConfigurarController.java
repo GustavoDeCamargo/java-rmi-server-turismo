@@ -17,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import sample.AppManager;
 import sample.Main;
+import sample.core.models.Hospedagem;
 import sample.core.models.Voo;
 
 import javax.swing.*;
@@ -76,8 +77,14 @@ public class ConfigurarController {
         appManager.getAeroManager().cadastrarVoo(voo);
     }
 
-    public void cadastrarHospedagem (){
+    public void cadastrarHospedagem () throws SQLException{
+        Hospedagem hospedagem = new Hospedagem(
+                hotel.getText(),
+                hotel_destino_box.getValue(),
+                Integer.parseInt(precoDiaria.getText()),
+                Integer.parseInt(capacidadeHotel.getText()));
 
+        appManager.getHotelManager().cadastrarHospedagem(hospedagem);
     }
 
 }

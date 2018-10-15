@@ -4,11 +4,25 @@ import java.util.Date;
 
 public class Hospedagem {
     private Integer id;
-    private Hotel hotel;
+    private String hotel;
+    private String destino;
     private Date data_entrada;
     private Date data_saida;
     private Integer numero_quartos;
     private Integer numero_pessoas;
+    private Integer preco;
+
+    public Hospedagem(String hotel, String destino, Integer numero_quartos, Integer numero_pessoas){
+
+        this.hotel = hotel;
+        this.destino = destino;
+        this.data_entrada = data_entrada;
+        this.data_saida = data_saida;
+        this.numero_quartos = numero_quartos;
+        this.numero_pessoas = numero_pessoas;
+        this.preco = preco;
+
+    }
 
     public Integer getId() {
         return id;
@@ -18,12 +32,28 @@ public class Hospedagem {
         this.id = id;
     }
 
-    public Hotel getHotel() {
+    public String getHotel() {
         return hotel;
     }
 
-    public void setHotel(Hotel hotel) {
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public void setHotel(String hotel) {
         this.hotel = hotel;
+    }
+
+    public Integer getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Integer preco_diaria) {
+        this.preco = preco;
     }
 
     public Date getData_entrada() {
@@ -57,4 +87,5 @@ public class Hospedagem {
     public void setNumero_pessoas(Integer numero_pessoas) {
         this.numero_pessoas = numero_pessoas;
     }
+
 }
