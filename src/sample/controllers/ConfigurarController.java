@@ -4,9 +4,7 @@ package sample.controllers; /**
 
 import java.net.URL;
 import java.security.GeneralSecurityException;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -15,12 +13,9 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import sample.AppManager;
 import sample.Main;
-import sample.core.models.Hospedagem;
-import sample.core.models.Voo;
-
-import javax.swing.*;
+import sample.core.models.Hotel;
+import sample.Voo;
 
 import static sample.Main.appManager;
 
@@ -71,20 +66,20 @@ public class ConfigurarController {
                 voo_origem_box.getValue(),
                 voo_destino_box.getValue(),
                 Integer.parseInt(capacidadeVoo.getText()),
-                Date.valueOf(dataIdaPicker.getValue()),
-                Date.valueOf(dataVoltaPicker.getValue()));
+                dataIdaPicker.getValue().toString(),
+                dataVoltaPicker.getValue().toString());
 
         appManager.getAeroManager().cadastrarVoo(voo);
     }
 
     public void cadastrarHospedagem () throws SQLException{
-        Hospedagem hospedagem = new Hospedagem(
+        Hotel hotel1 = new Hotel(
                 hotel.getText(),
                 hotel_destino_box.getValue(),
-                Integer.parseInt(precoDiaria.getText()),
-                Integer.parseInt(capacidadeHotel.getText()));
+                Integer.parseInt(capacidadeHotel.getText()),
+                Double.parseDouble(precoDiaria.getText()));
 
-        appManager.getHotelManager().cadastrarHospedagem(hospedagem);
+        appManager.getHotelManager().cadastrarHospedagem(hotel1);
     }
 
 }
