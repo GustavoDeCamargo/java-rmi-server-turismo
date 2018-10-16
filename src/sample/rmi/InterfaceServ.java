@@ -4,7 +4,7 @@ package sample.rmi;/*
  * and open the template in the editor.
  */
 
-import sample.rmi.InterfaceCli;
+import sample.Retorno;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
@@ -16,7 +16,10 @@ import java.rmi.RemoteException;
  * @author a1834240
  */
 public interface InterfaceServ extends Remote  {
-    
-    
-    public void registrarInteresse(String string,  InterfaceCli cli) throws RemoteException, AlreadyBoundException, NotBoundException;
+
+
+    void registrarInteresse(String string,  InterfaceCli cli) throws RemoteException, AlreadyBoundException, NotBoundException;
+
+    Retorno consultar() throws RemoteException;
+
 }

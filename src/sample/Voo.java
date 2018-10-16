@@ -1,16 +1,18 @@
-package sample.core.models;
+package sample;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Voo {
+public class Voo implements Serializable {
+    private static final long serialVersionUID = 8367908553994431734L;
     private String nome;
     private String origem;
     private String destino;
     private Integer capacidade;
-    private Date data_ida;
-    private Date data_volta;
+    private String data_ida;
+    private String data_volta;
 
-    public Voo(String nome, String origem, String destino, Integer capacidade, Date data_ida, Date data_volta) {
+    public Voo(String nome, String origem, String destino, Integer capacidade, String data_ida, String data_volta) {
         this.nome = nome;
         this.origem = origem;
         this.destino = destino;
@@ -51,19 +53,19 @@ public class Voo {
         this.capacidade = capacidade;
     }
 
-    public Date getData_ida() {
+    public String getData_ida() {
         return data_ida;
     }
 
-    public void setData_ida(Date data_ida) {
+    public void setData_ida(String data_ida) {
         this.data_ida = data_ida;
     }
 
-    public Date getData_volta() {
+    public String getData_volta() {
         return data_volta;
     }
 
-    public void setData_volta(Date data_volta) {
+    public void setData_volta(String data_volta) {
         this.data_volta = data_volta;
     }
 }

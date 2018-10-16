@@ -5,22 +5,18 @@
  */
 package sample.rmi;
 
-import sample.core.SubscribeManager;
-import sample.core.models.Interesse;
+import sample.Retorno;
+import sample.core.models.Passagem;
+import sample.Voo;
 import sample.database.ManagerQuery;
 import sample.database.Repository;
-import sample.rmi.InterfaceCli;
-import sample.rmi.InterfaceServ;
 
 import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static sample.Main.appManager;
-import static sample.rmi.RMIManager.SERVICONOMES;
 
 
 /**
@@ -39,7 +35,7 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
 
 
     @Override
-    public void registrarInteresse(String string, InterfaceCli cli) throws RemoteException, AlreadyBoundException {
+    public void registrarInteresse(String string, InterfaceCli cli) throws AlreadyBoundException, RemoteException  {
         try {
             appManager.getSubsManager().cadastrarInteresse(null,cli);
         } catch (SQLException e) {
@@ -47,6 +43,22 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
         }
     }
 
+    @Override
+    public Retorno consultar() throws RemoteException {
+        Passagem p = new Passagem();
+        Voo v = new Voo(null,"São Paulo","Curitiba",null,"2018-10-31",null);
+        p.setVoo(v);
+        p.setNumero_pessoas(3);
+        Retorno r = new Retorno();
+        try {
+            r.setVoos(appManager.getAeroManager().consultarVoos(p));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("a");
+
+        return r;
+    }
 
 
 }

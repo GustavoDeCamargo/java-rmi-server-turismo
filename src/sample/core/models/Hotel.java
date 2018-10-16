@@ -1,11 +1,22 @@
 package sample.core.models;
 
-public class Hotel {
+import java.io.Serializable;
+
+public class Hotel implements Serializable {
+    private static final long serialVersionUID = 8367908553994431734L;
     private Integer id;
     private String nome;
     private String local;
     private Integer vagas;
     private Integer ocupacao;
+    private Double preco;
+
+    public Hotel(String nome, String local, Integer vagas, Double preco) {
+        this.nome = nome;
+        this.local = local;
+        this.vagas = vagas;
+        this.preco = preco;
+    }
 
     public Integer getId() {
         return id;
@@ -45,5 +56,13 @@ public class Hotel {
 
     public void setOcupacao(Integer ocupacao) {
         this.ocupacao = ocupacao;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 }
