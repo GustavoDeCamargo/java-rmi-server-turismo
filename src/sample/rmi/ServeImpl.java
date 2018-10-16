@@ -6,7 +6,7 @@
 package sample.rmi;
 
 import sample.Retorno;
-import sample.core.models.Passagem;
+import sample.Passagem;
 import sample.Voo;
 import sample.database.ManagerQuery;
 import sample.database.Repository;
@@ -44,19 +44,22 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
     }
 
     @Override
-    public Retorno consultar() throws RemoteException {
-        Passagem p = new Passagem();
-        Voo v = new Voo(null,"São Paulo","Curitiba",null,"2018-10-31",null);
-        p.setVoo(v);
-        p.setNumero_pessoas(3);
+    public Retorno consultar(String tipoConsulta,Passagem passagem) throws RemoteException {
         Retorno r = new Retorno();
-        try {
-            r.setVoos(appManager.getAeroManager().consultarVoos(p));
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if(tipoConsulta.equals("Voos")) {
+            // Origem,Destino e data ida do Voo
+            // Voo e numeroPessoas da Passagem
+            Passagem p = new Passagem();
+            Voo v = new Voo(null, "São Paulo", "Curitiba", null, "2018-10-31", null);
+            p.setVoo(v);
+            p.setNumero_pessoas(3);
+            try {
+                r.setVoos(appManager.getAeroManager().consultarVoos(p));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.out.println(tipoConsulta);
         }
-        System.out.println("a");
-
         return r;
     }
 

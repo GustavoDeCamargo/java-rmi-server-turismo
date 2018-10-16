@@ -1,6 +1,6 @@
 package sample.core;
 
-import sample.core.models.Passagem;
+import sample.Passagem;
 import sample.Voo;
 import sample.database.ManagerQuery;
 import sample.database.Repository;

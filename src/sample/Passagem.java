@@ -1,10 +1,12 @@
-package sample.core.models;
+package sample;
 
 import sample.Voo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Passagem {
+public class Passagem implements Serializable {
+    private static final long serialVersionUID = 8367908553994431734L;
     private Integer id;
     private Voo voo;
     private Date data;
