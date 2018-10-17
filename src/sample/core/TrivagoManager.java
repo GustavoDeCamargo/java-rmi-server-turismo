@@ -92,7 +92,6 @@ public class TrivagoManager {
         else
         {
             hoteis.add(getHotelPeloNome(hospedagem.getHotel()));
-            System.out.println("Pelo Nome");
         }
 
         for (int i = 0;i<hoteis.size();i++) {
@@ -101,7 +100,6 @@ public class TrivagoManager {
                 hoteis.remove(i);
 
         }
-        System.out.println("alo");
         return hoteis;
     }
 

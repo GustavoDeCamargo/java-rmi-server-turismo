@@ -132,7 +132,6 @@ public class SubscribeManager {
                     voos = appManager.getAeroManager().consultarVoos(p);
 
                     int max=-1,count=0;
-                    System.out.println(voos);
                     for (j = 0; j<voos.size();j++) {
                         Voo voo = voos.get(j);
                         if(voo.getId() <= i.getId_checado()) {
@@ -144,7 +143,6 @@ public class SubscribeManager {
                     }
 
                     this.atualizarIdChecadoInteresse(i,max);
-                    System.out.println(voos.get(0).getNome());
                     if(voos.size()-count > 0)
                     {
                         notificarCliente(i.getNome_cliente(),
