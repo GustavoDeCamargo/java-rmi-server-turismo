@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ServidorController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ServidorController">
   <content>
     <AnchorPane minHeight="1.0" minWidth="0.0" prefHeight="790.0" prefWidth="844.0">
          <children>
@@ -75,6 +75,7 @@
                </font>
             </Text>
             <Button id="atualizar" fx:id="atualizar" layoutX="632.0" layoutY="20.0" mnemonicParsing="false" onAction="#atualizarTabelas" text="Atualizar" />
+            <Button id="atualizar" fx:id="botaoVoltar" layoutX="711.0" layoutY="20.0" mnemonicParsing="false" onAction="#back" text="Voltar" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

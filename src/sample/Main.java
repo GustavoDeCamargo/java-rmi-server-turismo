@@ -30,7 +30,7 @@ public class Main extends Application {
         Parent fxmlServidor = FXMLLoader.load(getClass().getResource("resources/Servidor.fxml"));
         Servidor = new Scene(fxmlServidor);
 
-        primaryStage.setTitle("Sistemas Recursos Compartilhados");
+        primaryStage.setTitle("Sistemas Java RMI - Server");
         primaryStage.setScene(Configurar);
         primaryStage.show();
     }
@@ -48,6 +48,8 @@ public class Main extends Application {
             case "sample":
                 stage.setScene(sample);
                 break;
+            case "back":
+                stage.setScene(Configurar);
         }
     }
 }

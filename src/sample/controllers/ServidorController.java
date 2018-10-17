@@ -2,10 +2,13 @@ package sample.controllers;
 
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import sample.Main;
 import sample.Voo;
 import sample.core.models.Hotel;
 import sample.Interesse;
@@ -17,6 +20,9 @@ import java.util.List;
 import static sample.Main.appManager;
 
 public class ServidorController {
+
+    @FXML
+    public Button botaoVoltar;
 
     @FXML
     TableView tabelaVoos,tabelaClientes,tabelaHospedagens,tabelaNotificacoes;
@@ -76,5 +82,9 @@ public class ServidorController {
                 appManager.getSubsManager().getAllConn(),
                 appManager.getHotelManager().getAllHoteis(),
                 appManager.getSubsManager().getAllInteresses());
+    }
+
+    public void back(ActionEvent actionEvent) {
+        Main.changeScreen("back");
     }
 }
