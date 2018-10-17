@@ -30,21 +30,21 @@ public class AeroManager {
     }
 
     public List<Voo> consultarVoos(Passagem passagem) throws SQLException {
-        List<Voo> voos;
+        List<Voo> voos = new ArrayList<>();
         Integer origem = repository.executeQuery(mquery.getIDCidadePeloNome(passagem.getVoo().getOrigem())).getInt("id");
         Integer destino = repository.executeQuery(mquery.getIDCidadePeloNome(passagem.getVoo().getDestino())).getInt("id");
         Integer volta_origem = destino;
         Integer volta_destino = origem;
         Passagem volta_passagem = new Passagem();
         volta_passagem.setVoo(new Voo(null,passagem.getVoo().getDestino(),passagem.getVoo().getOrigem(),null,null,null));
-        if (passagem.getVoo().getData_volta() == null)
+        if (passagem.getVoo().getData_volta() == null && passagem.getVoo().getData_ida() != null)
         {
            ResultSet rs = repository.executeQuery(mquery.getAllVoos(origem,destino,passagem.getVoo().getData_ida(),passagem.getNumero_pessoas(),false));
            voos = preencheVoos(rs,passagem,false);
            rs = repository.executeQuery(mquery.getAllVoos(volta_origem,volta_destino,passagem.getVoo().getData_ida(),passagem.getNumero_pessoas(),true));
            voos.addAll(preencheVoos(rs,volta_passagem,false));
         }
-        else
+        else if(passagem.getVoo().getData_volta() != null && passagem.getVoo().getData_ida() != null)
         {
             ResultSet rs = repository.executeQuery(mquery.getAllVoos(origem,destino,passagem.getVoo().getData_ida(),passagem.getNumero_pessoas(),false));
             voos = preencheVoos(rs,passagem,false);
@@ -55,6 +55,21 @@ public class AeroManager {
             volta_rs = repository.executeQuery(mquery.getAllVoos(origem,destino,passagem.getVoo().getData_volta(),passagem.getNumero_pessoas(),true));
             voos.addAll(preencheVoos(volta_rs,passagem,false));
         }
+        // Todos são nulls retorna todos voos de origem para destino
+        else
+        {
+            String query = "Select * from voos where origem = " +
+                    repository.executeQuery(mquery.getIDCidadePeloNome(passagem.getVoo().getOrigem())) .getInt("id")
+                    + " AND destino = " +
+                    repository.executeQuery(mquery.getIDCidadePeloNome(passagem.getVoo().getDestino())) .getInt("id")
+                    + " AND " +
+                    "preco <= " + passagem.getPreco() + ";";
+            ResultSet rs = repository.executeQuery(query);
+
+            voos = preencheVoos(rs,passagem,true);
+            System.out.println(query);
+        }
+
         return voos;
     }
 

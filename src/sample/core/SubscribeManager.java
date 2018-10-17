@@ -1,6 +1,8 @@
 package sample.core;
 
 import sample.Interesse;
+import sample.Passagem;
+import sample.Voo;
 import sample.core.models.ServicoNomes;
 import sample.database.ManagerQuery;
 import sample.database.Repository;
@@ -14,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static sample.Main.appManager;
 import static sample.rmi.RMIManager.SERVICONOMES;
 
 public class SubscribeManager {
@@ -23,6 +26,16 @@ public class SubscribeManager {
     public SubscribeManager() {
         this.repository = new Repository();
         this.mquery = new ManagerQuery();
+
+        try {
+            clearInteresses();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void clearInteresses() throws SQLException {
+        repository.executeUpdate("DELETE FROM interesses");
     }
 
     public void cadastrarInteresse(Interesse interesse, InterfaceCli cli) throws AlreadyBoundException, RemoteException, SQLException, NotBoundException {
@@ -42,6 +55,7 @@ public class SubscribeManager {
                 repository.executeQuery(mquery.getIDCidadePeloNome(interesse.getDestino())).getInt("id"),
                 interesse.getPreco_maximo()));
         notificarCliente(ref_cliente,"Interesse cadastrado com sucesso!");
+        checarInteresses();
     }
 
     private void notificarCliente(String ref_client, String msg) throws RemoteException, NotBoundException {
@@ -88,5 +102,38 @@ public class SubscribeManager {
         }
 
         return interesses;
+    }
+
+
+    public void checarInteresses() throws SQLException, RemoteException, NotBoundException {
+        List<Interesse> interesses = getAllInteresses();
+
+        for (Interesse i: interesses)
+        {
+            Integer tipo_interesse = i.getTipo_interesse();
+
+            switch(tipo_interesse)
+            {
+                case 1:
+                    //Passagens
+                    Passagem p = new Passagem();
+                    Voo v = new Voo(null, i.getOrigem(), i.getDestino(), null, null, null);
+                    p.setVoo(v);
+                    p.setPreco(i.getPreco_maximo());
+                    System.out.println(v.getOrigem() + v.getDestino());
+                    List<Voo> voos = appManager.getAeroManager().consultarVoos(p);
+                    double min;
+                    for (Voo voo:voos) {
+                        System.out.println(voo.getNome());
+                        // TODO PRECO DO VOO
+                    }
+                    if(voos.size() > 0)
+                    {
+                        notificarCliente(i.getNome_cliente(),
+                                "Temos disponível um voo para " + i.getDestino());
+                    }
+
+            }
+        }
     }
 }

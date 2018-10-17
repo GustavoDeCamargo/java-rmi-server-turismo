@@ -56,7 +56,7 @@ public class ManagerQuery {
                                   Integer origem, Integer destino, Double preco_maximo) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("INSERT INTO interesses(nome_cliente,ref_cliente," +
-                "tipo_interesse,destino,origem,preco_maximo) VALUES (");
+                "tipo_interesse,origem,destino,preco_maximo) VALUES (");
         stringBuilder.append("'" + nome_cliente + "',");
         stringBuilder.append("" + ref_cliente + ",");
         stringBuilder.append("" + tipo_interesse + ",");

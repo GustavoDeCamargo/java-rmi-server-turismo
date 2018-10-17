@@ -26,7 +26,6 @@ public class ServidorController {
             data_voltaColumn,h_nomeColumn,h_localColumn,h_vagasColumn,h_ocupacaoColumn,h_precoColumn;
     @FXML
     TableColumn i_destinoColumn,i_origemColumn,i_tipoColumn,i_refColumn,i_nomeColumn,i_precomaxColumn;
-    ;
 
     @FXML
     void initialize() {
