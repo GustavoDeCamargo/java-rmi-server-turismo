@@ -15,8 +15,12 @@
          <children>
             <TableView fx:id="tabelaNotificacoes" layoutX="27.0" layoutY="533.0" prefHeight="183.0" prefWidth="799.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="C1" />
-                  <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn fx:id="i_nomeColumn" prefWidth="100.0" text="Nome Cliente" />
+                  <TableColumn fx:id="i_refColumn" prefWidth="73.0" text="Ref Cliente" />
+                  <TableColumn fx:id="i_tipoColumn" prefWidth="85.0" text="Tipo Interesse" />
+                  <TableColumn fx:id="i_origemColumn" prefWidth="139.0" text="Origem" />
+                  <TableColumn fx:id="i_destinoColumn" prefWidth="89.0" text="Destino" />
+                  <TableColumn fx:id="i_precomaxColumn" prefWidth="113.0" text="Preço Maximo" />
                </columns>
             </TableView>
             <Text layoutX="353.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dados Servidor">
@@ -48,10 +52,11 @@
             </Text>
             <TableView fx:id="tabelaHospedagens" layoutX="27.0" layoutY="315.0" prefHeight="183.0" prefWidth="522.0">
                <columns>
-                  <TableColumn prefWidth="59.0" text="Nome" />
-                  <TableColumn prefWidth="66.0" text="Local" />
-                  <TableColumn minWidth="0.0" prefWidth="63.0" text="Vagas" />
-                  <TableColumn prefWidth="65.0" text="Ocupação" />
+                  <TableColumn fx:id="h_nomeColumn" prefWidth="59.0" text="Nome" />
+                  <TableColumn fx:id="h_localColumn" prefWidth="66.0" text="Local" />
+                  <TableColumn fx:id="h_vagasColumn" minWidth="0.0" prefWidth="63.0" text="Vagas" />
+                  <TableColumn fx:id="h_ocupacaoColumn" prefWidth="65.0" text="Ocupação" />
+                  <TableColumn fx:id="h_precoColumn" prefWidth="59.0" text="Preco" />
                </columns>
             </TableView>
             <Text layoutX="190.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hospedagens Cadastradas">

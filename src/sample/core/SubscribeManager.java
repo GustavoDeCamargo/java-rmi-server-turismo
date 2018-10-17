@@ -64,4 +64,25 @@ public class SubscribeManager {
         }
         return nomes;
     }
+
+    public List<Interesse> getAllInteresses() throws SQLException {
+        ResultSet rs = repository.executeQuery("SELECT * FROM interesses");
+        List<Interesse> interesses = new ArrayList<>();
+
+        while(rs.next())
+        {
+            Interesse i = new Interesse(rs.getString("nome_cliente"),
+                    String.valueOf(rs.getInt("ref_cliente")),
+                    rs.getInt("tipo_interesse"),
+                    repository.executeQuery(mquery.getNomeCidadePeloId(rs.getInt("origem"))).getString("nome"),
+                    repository.executeQuery(mquery.getNomeCidadePeloId(rs.getInt("destino"))).getString("nome"),
+                    rs.getDouble("preco_maximo")
+                    );
+
+            interesses.add(i);
+
+        }
+
+        return interesses;
+    }
 }
