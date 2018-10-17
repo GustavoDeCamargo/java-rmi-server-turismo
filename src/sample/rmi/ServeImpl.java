@@ -7,11 +7,12 @@ package sample.rmi;
 
 import sample.Retorno;
 import sample.Passagem;
-import sample.Voo;
+import sample.Interesse;
 import sample.database.ManagerQuery;
 import sample.database.Repository;
 
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
@@ -36,10 +37,12 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
 
 
     @Override
-    public void registrarInteresse(String string, InterfaceCli cli) throws AlreadyBoundException, RemoteException  {
+    public void registrarInteresse(Interesse interesse, InterfaceCli cli) throws AlreadyBoundException, RemoteException  {
         try {
-            appManager.getSubsManager().cadastrarInteresse(null,cli);
+            appManager.getSubsManager().cadastrarInteresse(interesse,cli);
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
             e.printStackTrace();
         }
     }

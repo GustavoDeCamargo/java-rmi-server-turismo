@@ -1,6 +1,6 @@
 package sample.core;
 
-import sample.core.models.Interesse;
+import sample.Interesse;
 import sample.core.models.ServicoNomes;
 import sample.database.ManagerQuery;
 import sample.database.Repository;
@@ -25,7 +25,7 @@ public class SubscribeManager {
         this.mquery = new ManagerQuery();
     }
 
-    public void cadastrarInteresse(String string, InterfaceCli cli) throws AlreadyBoundException, RemoteException, SQLException {
+    public void cadastrarInteresse(Interesse interesse, InterfaceCli cli) throws AlreadyBoundException, RemoteException, SQLException, NotBoundException {
         ResultSet rs;
         String ref_cliente = null;
         try {
@@ -37,12 +37,16 @@ public class SubscribeManager {
         registrarObjetoRemoto(ref_cliente,cli);
         Integer ref_id = repository.executeQuery(mquery.getIDServicoNomesPeloNome(ref_cliente)).getInt("id");
         repository.executeUpdate(mquery.insertInteresse(ref_cliente,ref_id,
-                3,1,2,500.0));
+                interesse.getTipo_interesse(),
+                repository.executeQuery(mquery.getIDCidadePeloNome(interesse.getOrigem())).getInt("id"),
+                repository.executeQuery(mquery.getIDCidadePeloNome(interesse.getDestino())).getInt("id"),
+                interesse.getPreco_maximo()));
+        notificarCliente(ref_cliente,"Interesse cadastrado com sucesso!");
     }
 
     private void notificarCliente(String ref_client, String msg) throws RemoteException, NotBoundException {
         InterfaceCli com = (InterfaceCli)SERVICONOMES.lookup(ref_client);
-        com.notificar(ref_client+msg);
+        com.notificar(ref_client+ " " + msg);
     }
 
     private void registrarObjetoRemoto(String ref_client, InterfaceCli cliente) throws AlreadyBoundException, RemoteException {

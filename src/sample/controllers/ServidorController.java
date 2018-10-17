@@ -1,23 +1,17 @@
 package sample.controllers;
 
 
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import sample.AppManager;
 import sample.Voo;
 import sample.core.models.Hotel;
-import sample.core.models.Interesse;
+import sample.Interesse;
 import sample.core.models.ServicoNomes;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static sample.Main.appManager;
@@ -75,6 +69,10 @@ public class ServidorController {
 
     @FXML
     public void atualizarTabelas() throws SQLException {
+        tabelaVoos.getItems().clear();
+        tabelaClientes.getItems().clear();
+        tabelaHospedagens.getItems().clear();
+        tabelaNotificacoes.getItems().clear();
         iniciarCamposTabelas(appManager.getAeroManager().getAllVoos(),
                 appManager.getSubsManager().getAllConn(),
                 appManager.getHotelManager().getAllHoteis(),

@@ -1,6 +1,9 @@
-package sample.core.models;
+package sample;
 
-public class Interesse {
+import java.io.Serializable;
+
+public class Interesse implements Serializable {
+    private static final long serialVersionUID = 8367908553994431734L;
 
     private Integer id;
     private String nome_cliente;
