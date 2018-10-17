@@ -15,6 +15,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.List;
 
 import static sample.Main.appManager;
 
@@ -46,7 +47,7 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
     @Override
     public Retorno consultar(String tipoConsulta,Passagem passagem) throws RemoteException {
         Retorno r = new Retorno();
-        if(tipoConsulta.equals("Voos")) {
+        if(tipoConsulta.equals("Passagem")) {
             // Origem,Destino e data ida do Voo
             // Voo e numeroPessoas da Passagem
             Passagem p = new Passagem();
@@ -63,5 +64,14 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
         return r;
     }
 
-
+    @Override
+    public List<String> GetCidades() throws RemoteException {
+        List<String> cidades = null;
+        try {
+            cidades = appManager.getHotelManager().getAllCidades();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cidades;
+    }
 }
