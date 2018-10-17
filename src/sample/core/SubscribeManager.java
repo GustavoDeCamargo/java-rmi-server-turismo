@@ -1,6 +1,7 @@
 package sample.core;
 
 import sample.core.models.Interesse;
+import sample.core.models.ServicoNomes;
 import sample.database.ManagerQuery;
 import sample.database.Repository;
 import sample.rmi.InterfaceCli;
@@ -10,6 +11,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static sample.rmi.RMIManager.SERVICONOMES;
 
@@ -49,5 +52,16 @@ public class SubscribeManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<ServicoNomes> getAllConn() throws SQLException {
+        ResultSet rs = repository.executeQuery("SELECT nome from servico_nomes");
+        List<ServicoNomes> nomes = new ArrayList<>();
+
+        while(rs.next())
+        {
+            nomes.add(new ServicoNomes(rs.getString("nome")));
+        }
+        return nomes;
     }
 }

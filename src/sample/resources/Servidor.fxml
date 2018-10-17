@@ -61,8 +61,7 @@
             </Text>
             <TableView fx:id="tabelaClientes" layoutX="580.0" layoutY="94.0" prefHeight="404.0" prefWidth="245.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="C1" />
-                  <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn fx:id="con_nomes" prefWidth="244.0" text="Nome" />
                </columns>
             </TableView>
             <Text layoutX="617.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clientes Conectados">
