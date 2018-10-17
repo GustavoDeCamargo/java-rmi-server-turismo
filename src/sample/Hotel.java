@@ -1,4 +1,4 @@
-package sample.core.models;
+package sample;
 
 import java.io.Serializable;
 

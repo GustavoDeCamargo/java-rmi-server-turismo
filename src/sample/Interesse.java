@@ -16,15 +16,17 @@ public class Interesse implements Serializable {
     private String origem;
     private String destino;
     private Double preco_maximo;
+    private Integer id_checado;
 
 
-    public Interesse(String nome_cliente, String ref_cliente, Integer tipo_interesse, String origem, String destino, Double preco_maximo) {
+    public Interesse(String nome_cliente, String ref_cliente, Integer tipo_interesse, String origem, String destino, Double preco_maximo, Integer id_checado) {
         this.nome_cliente = nome_cliente;
         this.ref_cliente = ref_cliente;
         this.tipo_interesse = tipo_interesse;
         this.origem = origem;
         this.destino = destino;
         this.preco_maximo = preco_maximo;
+        this.id_checado = id_checado;
     }
 
     public Integer getId() {
@@ -81,5 +83,13 @@ public class Interesse implements Serializable {
 
     public void setPreco_maximo(Double preco_maximo) {
         this.preco_maximo = preco_maximo;
+    }
+
+    public Integer getId_checado() {
+        return id_checado;
+    }
+
+    public void setId_checado(Integer id_checado) {
+        this.id_checado = id_checado;
     }
 }

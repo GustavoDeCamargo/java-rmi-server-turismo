@@ -5,6 +5,7 @@
  */
 package sample.rmi;
 
+import sample.Hospedagem;
 import sample.Retorno;
 import sample.Passagem;
 import sample.Interesse;
@@ -37,22 +38,32 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
 
 
     @Override
-    public void registrarInteresse(Interesse interesse, InterfaceCli cli) throws AlreadyBoundException, RemoteException  {
+    public String registrarInteresse(Interesse interesse, InterfaceCli cli,String id) throws AlreadyBoundException, RemoteException  {
+        String retorno = null;
         try {
-            appManager.getSubsManager().cadastrarInteresse(interesse,cli);
+           retorno = appManager.getSubsManager().cadastrarInteresse(interesse,cli,id);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
             e.printStackTrace();
         }
+        return retorno;
     }
 
     @Override
-    public Retorno consultar(String tipoConsulta,Passagem passagem) throws RemoteException {
+    public Retorno consultar(String tipoConsulta, Passagem passagem, Hospedagem hospedagem) throws RemoteException {
         Retorno r = new Retorno();
         if(tipoConsulta.equals("Passagem")) {
             try {
                 r.setVoos(appManager.getAeroManager().consultarVoos(passagem));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(tipoConsulta.equals("Hospedagem"))
+        {
+            try {
+                r.setHoteis(appManager.getHotelManager().consultarHoteis(hospedagem));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -75,6 +86,36 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
     public void comprarPassagem(Passagem p) throws RemoteException {
         try {
             appManager.getAeroManager().efetuarCompraPassagem(p);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void comprarHospedagem(Hospedagem hospedagem) throws RemoteException {
+        try {
+            appManager.getHotelManager().efetuarCompraHospedagem(hospedagem);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Interesse> getInteresses(String cliente) throws RemoteException {
+        List<Interesse> interesses = null;
+        try {
+            interesses = appManager.getSubsManager().getInteressesPeloCliente(cliente);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return interesses;
+    }
+
+    @Override
+    public void deletarInteresse(Integer id_interesse) throws RemoteException {
+        try {
+            appManager.getSubsManager().deleteInteresse(id_interesse);
         } catch (SQLException e) {
             e.printStackTrace();
         }

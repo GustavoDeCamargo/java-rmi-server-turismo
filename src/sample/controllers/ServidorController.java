@@ -10,7 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Main;
 import sample.Voo;
-import sample.core.models.Hotel;
+import sample.Hotel;
 import sample.Interesse;
 import sample.core.models.ServicoNomes;
 

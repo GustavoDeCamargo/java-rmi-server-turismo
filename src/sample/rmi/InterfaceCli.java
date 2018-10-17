@@ -13,7 +13,6 @@ import java.rmi.RemoteException;
  * @author a1834240
  */
 public interface InterfaceCli extends Remote {
-
     public void notificar(String str)throws RemoteException;
     
 }

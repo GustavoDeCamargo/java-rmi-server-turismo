@@ -1,8 +1,5 @@
 package sample;
 
-import sample.core.models.Hotel;
-import sample.core.models.Pacote;
-
 import java.util.List;
 
 public class Retorno implements java.io.Serializable {

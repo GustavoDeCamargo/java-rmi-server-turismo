@@ -3,6 +3,8 @@ package sample.controllers; /**
  */
 
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.security.GeneralSecurityException;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,7 +16,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import sample.Main;
-import sample.core.models.Hotel;
+import sample.Hotel;
 import sample.Voo;
 
 import static sample.Main.appManager;
@@ -31,7 +33,7 @@ public class ConfigurarController {
     private JFXComboBox<String> voo_origem_box,hotel_destino_box,voo_destino_box;
 
     @FXML
-    private JFXTextField precoVoo,precoDiaria,hotel,capacidadeVoo,capacidadeHotel;
+    private JFXTextField precoVoo,precoDiaria,hotel,capacidadeVoo,capacidadeHotel,nomeVoo;
 
     @FXML
     private JFXDatePicker dataIdaPicker,dataVoltaPicker;
@@ -61,8 +63,8 @@ public class ConfigurarController {
 //        }
     }
 
-    public void cadastrarVoo () throws SQLException {
-        Voo voo = new Voo("AQK232",
+    public void cadastrarVoo () throws SQLException, RemoteException, NotBoundException {
+        Voo voo = new Voo(nomeVoo.getText(),
                 voo_origem_box.getValue(),
                 voo_destino_box.getValue(),
                 Integer.parseInt(capacidadeVoo.getText()),
@@ -72,7 +74,7 @@ public class ConfigurarController {
         appManager.getAeroManager().cadastrarVoo(voo);
     }
 
-    public void cadastrarHospedagem () throws SQLException{
+    public void cadastrarHospedagem () throws SQLException, RemoteException, NotBoundException {
         Hotel hotel1 = new Hotel(
                 hotel.getText(),
                 hotel_destino_box.getValue(),

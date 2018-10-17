@@ -5,6 +5,8 @@ import sample.Voo;
 import sample.database.ManagerQuery;
 import sample.database.Repository;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -24,11 +26,12 @@ public class AeroManager {
         this.mquery = new ManagerQuery();
     }
 
-    public void cadastrarVoo(Voo voo) throws SQLException {
+    public void cadastrarVoo(Voo voo) throws SQLException, RemoteException, NotBoundException {
         Integer origem = repository.executeQuery(mquery.getIDCidadePeloNome(voo.getOrigem())).getInt("id");
         Integer destino = repository.executeQuery(mquery.getIDCidadePeloNome(voo.getDestino())).getInt("id");
         String sql = mquery.cadastrarVoo(voo.getNome(),origem,destino,voo.getCapacidade(),voo.getData_ida(),voo.getData_volta());
         repository.executeUpdate(sql);
+        appManager.getSubsManager().checarInteresses();
     }
 
     public List<Voo> consultarVoos(Passagem passagem) throws SQLException {
@@ -88,6 +91,7 @@ public class AeroManager {
         while(rs.next())
         {
             Voo v = new Voo(null,null,null,null,null,null);
+            v.setId(rs.getInt("id"));
             v.setNome(rs.getString("nome"));
             v.setCapacidade(rs.getInt("capacidade"));
             v.setVendidos(rs.getInt("vendidos"));

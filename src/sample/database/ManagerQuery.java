@@ -1,11 +1,6 @@
 package sample.database;
 
 
-import sample.core.models.Hotel;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 // Implementa as funções que montam as querys
 public class ManagerQuery {
 
@@ -56,13 +51,14 @@ public class ManagerQuery {
                                   Integer origem, Integer destino, Double preco_maximo) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("INSERT INTO interesses(nome_cliente,ref_cliente," +
-                "tipo_interesse,origem,destino,preco_maximo) VALUES (");
+                "tipo_interesse,origem,destino,preco_maximo,id_checado) VALUES (");
         stringBuilder.append("'" + nome_cliente + "',");
         stringBuilder.append("" + ref_cliente + ",");
         stringBuilder.append("" + tipo_interesse + ",");
         stringBuilder.append("" + origem + ",");
         stringBuilder.append("" + destino + ",");
-        stringBuilder.append("" + preco_maximo + ");");
+        stringBuilder.append("" + preco_maximo + ",");
+        stringBuilder.append("" + 0 + ");");
 
         System.out.println(stringBuilder.toString());
         return stringBuilder.toString();
@@ -160,7 +156,7 @@ public class ManagerQuery {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("UPDATE hoteis SET ocupacao = ");
         stringBuilder.append(novo_valor);
-        stringBuilder.append(" WHERE nome = " + nome);
+        stringBuilder.append(" WHERE nome = '" + nome + "';");
         System.out.println(stringBuilder.toString());
         return stringBuilder.toString();
     }
@@ -178,5 +174,10 @@ public class ManagerQuery {
     public String getAllVoos()
     {
         return "SELECT * FROM voos";
+    }
+
+    public String getOcupacaoPeloId(Integer id)
+    {
+        return "SELECT ocupacao from hoteis WHERE id = " + id + ";";
     }
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Voo implements Serializable {
     private static final long serialVersionUID = 8367908553994431734L;
+    private Integer id;
     private String nome;
     private String origem;
     private String destino;
@@ -21,6 +22,14 @@ public class Voo implements Serializable {
         this.capacidade = capacidade;
         this.data_ida = data_ida;
         this.data_volta = data_volta;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
