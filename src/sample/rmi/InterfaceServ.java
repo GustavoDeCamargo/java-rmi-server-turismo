@@ -35,4 +35,6 @@ public interface InterfaceServ extends Remote  {
     List<Interesse> getInteresses(String cliente) throws RemoteException;
 
     void deletarInteresse(Integer id_interesse) throws  RemoteException;
+
+    List<String> getHoteis() throws RemoteException;
 }

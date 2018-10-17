@@ -184,7 +184,9 @@ public class SubscribeManager {
                     p.setPreco(i.getPreco_maximo());
                     voos = appManager.getAeroManager().consultarVoos(p);
 
-                    max = -1, count=0;
+                    max = -1;
+                    count=0;
+                    Double v_min= 9999.0;
                     for (j = 0; j<voos.size();j++) {
                         Voo voo = voos.get(j);
                         if(voo.getId() <= i.getId_checado()) {
@@ -192,6 +194,8 @@ public class SubscribeManager {
                         }
                         if (voo.getId() > max)
                             max = voo.getId();
+                        if(voo.getPreco() < v_min)
+                            v_min = voo.getPreco();
                         // TODO PRECO DO VOO NO RETORNO
                     }
 
@@ -214,8 +218,8 @@ public class SubscribeManager {
 
                     this.atualizarIdChecadoInteresse(i,max);
 
-                    if(hoteis.size() - counth > 0 && voos.size() - count > 0){
-                        notificarCliente(i.getRef_cliente(), " encontramos seu pacote ideal");
+                    if(hoteis.size() - counth > 0 && voos.size() - count > 0 && v_min + min <= i.getPreco_maximo()){
+                        notificarCliente(i.getNome_cliente(), " encontramos seu pacote ideal");
                     }
                     break;
             }

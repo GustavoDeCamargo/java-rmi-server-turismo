@@ -5,10 +5,7 @@
  */
 package sample.rmi;
 
-import sample.Hospedagem;
-import sample.Retorno;
-import sample.Passagem;
-import sample.Interesse;
+import sample.*;
 import sample.database.ManagerQuery;
 import sample.database.Repository;
 
@@ -17,6 +14,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static sample.Main.appManager;
@@ -55,7 +53,6 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
     @Override
     public Retorno consultar(String tipoConsulta, Passagem passagem, Hospedagem hospedagem) throws RemoteException {
         Retorno r = new Retorno();
-        synchronized(this) {
             if (tipoConsulta.equals("Passagem")) {
                 try {
                     r.setVoos(appManager.getAeroManager().consultarVoos(passagem));
@@ -69,20 +66,17 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
                     e.printStackTrace();
                 }
             }
-        }
         return r;
     }
 
     @Override
     public List<String> GetCidades() throws RemoteException {
         List<String> cidades = null;
-        synchronized(this) {
             try {
                 cidades = appManager.getHotelManager().getAllCidades();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
         return cidades;
     }
 
@@ -111,24 +105,37 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
     @Override
     public List<Interesse> getInteresses(String cliente) throws RemoteException {
         List<Interesse> interesses = null;
-        synchronized(this) {
             try {
                 interesses = appManager.getSubsManager().getInteressesPeloCliente(cliente);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
         return interesses;
     }
 
     @Override
     public void deletarInteresse(Integer id_interesse) throws RemoteException {
-        synchronized(this) {
             try {
                 appManager.getSubsManager().deleteInteresse(id_interesse);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
+    }
+
+    @Override
+    public List<String> getHoteis() throws RemoteException {
+        List<Hotel> hoteis = null;
+            try {
+                hoteis = appManager.getHotelManager().getAllHoteis();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        List<String> stringList = new ArrayList<>();
+        for (Hotel h:hoteis)
+    {
+        stringList.add(h.getNome());
+    }
+
+        return stringList;
     }
 }

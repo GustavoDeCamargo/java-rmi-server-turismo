@@ -20,16 +20,17 @@ public class ManagerQuery {
         return "SELECT nome from cidades;";
     }
 
-    public String cadastrarVoo(String nome, Integer origem, Integer destino, Integer capacidade, String data_ida, String data_volta)
+    public String cadastrarVoo(String nome, Integer origem, Integer destino, Integer capacidade, String data_ida, String data_volta,Double preco)
     {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("INSERT INTO voos(nome,origem,destino,capacidade,vendidos,data_ida,data_volta) VALUES (");
+        stringBuilder.append("INSERT INTO voos(nome,origem,destino,capacidade,vendidos,data_ida,preco,data_volta) VALUES (");
         stringBuilder.append("'" + nome + "',");
         stringBuilder.append("'" + origem + "',");
         stringBuilder.append("'" + destino + "',");
         stringBuilder.append("" + capacidade + ",");
         stringBuilder.append("" + 0 + ",");
         stringBuilder.append("'" + data_ida + "',");
+        stringBuilder.append("" + preco + ",");
         stringBuilder.append("'" + data_volta + "');");
         System.out.println(stringBuilder.toString());
 
