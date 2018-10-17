@@ -46,6 +46,11 @@ public class ManagerQuery {
         return "SELECT id FROM cidades WHERE nome = '" + nome + "';";
     }
 
+    public String getNomeCidadePeloId(Integer id)
+    {
+        return "SELECT nome FROM cidades WHERE id = " + id + ";";
+    }
+
 
     public String insertInteresse(String nome_cliente, Integer ref_cliente, Integer tipo_interesse,
                                   Integer origem, Integer destino, Double preco_maximo) {
@@ -80,13 +85,16 @@ public class ManagerQuery {
         return stringBuilder.toString();
     }
 
-    public String getAllVoos(Integer origem,Integer destino,String data,Integer num_pessoas)
+    public String getAllVoos(Integer origem,Integer destino,String data,Integer num_pessoas,Boolean volta)
     {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("SELECT * FROM voos WHERE ");
         stringBuilder.append("origem = "+ origem + " AND ");
         stringBuilder.append("destino = " + destino + " AND ");
-        stringBuilder.append("data_ida = '" + data + "' AND ");
+        if (volta)
+            stringBuilder.append("data_volta = '" + data + "' AND ");
+        else
+            stringBuilder.append("data_ida = '" + data + "' AND ");
         stringBuilder.append("capacidade-vendidos >= " + num_pessoas);
         System.out.println(stringBuilder.toString());
         return stringBuilder.toString();
@@ -155,5 +163,10 @@ public class ManagerQuery {
         stringBuilder.append(" WHERE nome = " + nome);
         System.out.println(stringBuilder.toString());
         return stringBuilder.toString();
+    }
+
+    public String getIdVooPeloNome(String nome)
+    {
+        return "SELECT id from voo WHERE nome = " + nome;
     }
 }

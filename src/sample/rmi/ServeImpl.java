@@ -48,18 +48,11 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
     public Retorno consultar(String tipoConsulta,Passagem passagem) throws RemoteException {
         Retorno r = new Retorno();
         if(tipoConsulta.equals("Passagem")) {
-            // Origem,Destino e data ida do Voo
-            // Voo e numeroPessoas da Passagem
-            Passagem p = new Passagem();
-            Voo v = new Voo(null, "São Paulo", "Curitiba", null, "2018-10-31", null);
-            p.setVoo(v);
-            p.setNumero_pessoas(3);
             try {
-                r.setVoos(appManager.getAeroManager().consultarVoos(p));
+                r.setVoos(appManager.getAeroManager().consultarVoos(passagem));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            System.out.println(tipoConsulta);
         }
         return r;
     }
