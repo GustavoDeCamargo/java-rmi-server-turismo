@@ -1,11 +1,18 @@
 package sample.controllers;
 
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import sample.AppManager;
 import sample.Voo;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import static sample.Main.appManager;
 
 public class ServidorController {
 
@@ -18,13 +25,16 @@ public class ServidorController {
 
     @FXML
     void initialize() {
-
-      //  tabelaVoos.getItems().addAll(new Voo("teste",null,null,null,null,null));
+        try {
+            iniciarCamposTabelas(appManager.getAeroManager().getAllVoos());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //  tabelaVoos.getItems().addAll(new Voo("teste",null,null,null,null,null));
     }
 
-    private void iniciarCamposTabelas()
+    private void iniciarCamposTabelas(List<Voo> voos)
     {
-        Voo v = new Voo("teste","São Paulo","Curitiba",2,"2018-10-11","2018-10-11");
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         origemColumn.setCellValueFactory(new PropertyValueFactory<>("origem"));
         destinoColumn.setCellValueFactory(new PropertyValueFactory<>("destino"));
@@ -32,14 +42,13 @@ public class ServidorController {
         vendidosColumn.setCellValueFactory(new PropertyValueFactory<>("vendidos"));
         data_idaColumn.setCellValueFactory(new PropertyValueFactory<>("data_ida"));
         data_voltaColumn.setCellValueFactory(new PropertyValueFactory<>("data_volta"));
-        v.setVendidos(200);
-        tabelaVoos.getItems().addAll(v);
+        tabelaVoos.getItems().addAll(FXCollections.observableArrayList(voos));
 
     }
 
     @FXML
     public void atualizarTabelas()
     {
-        iniciarCamposTabelas();
+
     }
 }

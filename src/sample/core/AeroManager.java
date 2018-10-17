@@ -40,20 +40,20 @@ public class AeroManager {
         if (passagem.getVoo().getData_volta() == null)
         {
            ResultSet rs = repository.executeQuery(mquery.getAllVoos(origem,destino,passagem.getVoo().getData_ida(),passagem.getNumero_pessoas(),false));
-           voos = preencheVoos(rs,passagem);
+           voos = preencheVoos(rs,passagem,false);
            rs = repository.executeQuery(mquery.getAllVoos(volta_origem,volta_destino,passagem.getVoo().getData_ida(),passagem.getNumero_pessoas(),true));
-           voos.addAll(preencheVoos(rs,volta_passagem));
+           voos.addAll(preencheVoos(rs,volta_passagem,false));
         }
         else
         {
             ResultSet rs = repository.executeQuery(mquery.getAllVoos(origem,destino,passagem.getVoo().getData_ida(),passagem.getNumero_pessoas(),false));
-            voos = preencheVoos(rs,passagem);
+            voos = preencheVoos(rs,passagem,false);
             rs = repository.executeQuery(mquery.getAllVoos(volta_origem,volta_destino,passagem.getVoo().getData_ida(),passagem.getNumero_pessoas(),true));
-            voos.addAll(preencheVoos(rs,volta_passagem));
+            voos.addAll(preencheVoos(rs,volta_passagem,false));
             ResultSet volta_rs = repository.executeQuery(mquery.getAllVoos(volta_origem,volta_destino,passagem.getVoo().getData_volta(),passagem.getNumero_pessoas(),false));
-            voos.addAll(preencheVoos(volta_rs,volta_passagem));
+            voos.addAll(preencheVoos(volta_rs,volta_passagem,false));
             volta_rs = repository.executeQuery(mquery.getAllVoos(origem,destino,passagem.getVoo().getData_volta(),passagem.getNumero_pessoas(),true));
-            voos.addAll(preencheVoos(volta_rs,passagem));
+            voos.addAll(preencheVoos(volta_rs,passagem,false));
         }
         return voos;
     }
@@ -66,7 +66,7 @@ public class AeroManager {
         repository.executeUpdate(mquery.aumentarVendidosVoo(passagem.getVoo().getNome(),vendidos+1));
     }
 
-    private List<Voo> preencheVoos(ResultSet rs, Passagem passagem) throws SQLException {
+    private List<Voo> preencheVoos(ResultSet rs, Passagem passagem,boolean get_all) throws SQLException {
         List<Voo> voos = new ArrayList<>();
         while(rs.next())
         {
@@ -76,11 +76,24 @@ public class AeroManager {
             v.setVendidos(rs.getInt("vendidos"));
             v.setData_ida(rs.getString("data_ida"));
             v.setData_volta(rs.getString("data_volta"));
-            v.setOrigem(passagem.getVoo().getOrigem());
-            v.setDestino(passagem.getVoo().getDestino());
+            if (!get_all) {
+                v.setOrigem(passagem.getVoo().getOrigem());
+                v.setDestino(passagem.getVoo().getDestino());
+            }
+            else
+            {
+                v.setOrigem(repository.executeQuery(mquery.getNomeCidadePeloId(rs.getInt("origem"))).getString("nome"));
+                v.setDestino(repository.executeQuery(mquery.getNomeCidadePeloId(rs.getInt("destino"))).getString("nome"));
+            }
             voos.add(v);
         }
         return voos;
+    }
+
+    public List<Voo> getAllVoos() throws SQLException {
+        ResultSet rs = repository.executeQuery(mquery.getAllVoos());
+
+       return preencheVoos(rs,null,true);
     }
 
 

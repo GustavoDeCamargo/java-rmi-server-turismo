@@ -174,4 +174,9 @@ public class ManagerQuery {
     {
         return "SELECT vendidos from voo WHERE nome = " + nome;
     }
+
+    public String getAllVoos()
+    {
+        return "SELECT * FROM voos";
+    }
 }
