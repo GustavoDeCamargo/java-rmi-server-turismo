@@ -52,4 +52,22 @@ public class TrivagoManager {
         }
         return hoteis;
     }
+
+    public List<Hotel> getHoteisPeloLocal(String local) throws SQLException {
+        ResultSet rs = repository.executeQuery("SELECT * FROM hoteis WHERE local = "
+                + repository.executeQuery(mquery.getIDCidadePeloNome(local)).getInt("id"));
+        List<Hotel> hoteis = new ArrayList<>();
+
+        while(rs.next())
+        {
+            Hotel h = new Hotel(rs.getString("nome"),
+                    repository.executeQuery(mquery.getNomeCidadePeloId(rs.getInt("local"))).getString("nome"),
+                    rs.getInt("vagas"),
+                    rs.getDouble("preco"));
+            h.setOcupacao(rs.getInt("ocupacao"));
+            hoteis.add(h);
+        }
+
+        return hoteis;
+    }
 }

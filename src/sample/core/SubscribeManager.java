@@ -3,6 +3,7 @@ package sample.core;
 import sample.Interesse;
 import sample.Passagem;
 import sample.Voo;
+import sample.core.models.Hotel;
 import sample.core.models.ServicoNomes;
 import sample.database.ManagerQuery;
 import sample.database.Repository;
@@ -125,13 +126,19 @@ public class SubscribeManager {
                     double min;
                     for (Voo voo:voos) {
                         System.out.println(voo.getNome());
-                        // TODO PRECO DO VOO
+                        // TODO PRECO DO VOO NO RETORNO
                     }
                     if(voos.size() > 0)
                     {
                         notificarCliente(i.getNome_cliente(),
                                 "Temos disponível um voo para " + i.getDestino());
                     }
+                    break;
+                case 2:
+                    // Hospedagens
+                    List<Hotel> hoteis = appManager.getHotelManager().getHoteisPeloLocal(i.getDestino());
+                    System.out.println(hoteis);
+                    break;
 
             }
         }
