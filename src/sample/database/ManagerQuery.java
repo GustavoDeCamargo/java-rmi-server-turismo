@@ -80,31 +80,34 @@ public class ManagerQuery {
         return stringBuilder.toString();
     }
 
-    public String getAllVoos(Integer origem,Integer destino,String data)
+    public String getAllVoos(Integer origem,Integer destino,String data,Integer num_pessoas)
     {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("SELECT * FROM voos WHERE ");
         stringBuilder.append("origem = "+ origem + " AND ");
         stringBuilder.append("destino = " + destino + " AND ");
         stringBuilder.append("data_ida = '" + data + "' AND ");
+        stringBuilder.append("capacidade-vendidos >= " + num_pessoas);
         System.out.println(stringBuilder.toString());
         return stringBuilder.toString();
     }
 
-    public String getAllHoteisByDestino(Integer destino)
+    public String getAllHoteisByDestino(Integer destino,Integer num_pessoas)
     {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("SELECT * FROM hoteis WHERE ");
         stringBuilder.append("local = "+ destino + " AND ");
+        stringBuilder.append("vagas-ocupacao >= " + num_pessoas);
         System.out.println(stringBuilder.toString());
         return stringBuilder.toString();
     }
 
-    public String getAllHoteisByNome(String nome)
+    public String getAllHoteisByNome(String nome,Integer num_pessoas)
     {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("SELECT * FROM hoteis WHERE ");
         stringBuilder.append("nome = "+ nome + " AND ");
+        stringBuilder.append("vagas-ocupacao >= " + num_pessoas);
         System.out.println(stringBuilder.toString());
         return stringBuilder.toString();
     }
@@ -113,6 +116,41 @@ public class ManagerQuery {
     {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("UPDATE voos SET vendidos = ");
+        stringBuilder.append(novo_valor);
+        stringBuilder.append(" WHERE nome = " + nome);
+        System.out.println(stringBuilder.toString());
+        return stringBuilder.toString();
+    }
+
+    public String compraPassagem(String data,Integer voo_id,String nome_cliente)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("INSERT INTO passagens(data,voo,cliente) VALUES (");
+        stringBuilder.append("'"+ data +"',");
+        stringBuilder.append(""+ voo_id +",");
+        stringBuilder.append("'"+ nome_cliente +"');");
+        System.out.println(stringBuilder.toString());
+        return stringBuilder.toString();
+    }
+
+    public String compraHospedagem(Integer hotel,String data_entrada,String data_saida,Integer num_quartos,Integer num_pessoas)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("INSERT INTO hospedagem(hotel,data_entrada,data_saida,numero_quartos,numero_pessoas)" +
+                " VALUES (");
+        stringBuilder.append(""+ hotel +",");
+        stringBuilder.append("'"+ data_entrada +"',");
+        stringBuilder.append("'"+ data_saida +"',");
+        stringBuilder.append(""+ num_quartos +",");
+        stringBuilder.append(""+ num_pessoas +");");
+        System.out.println(stringBuilder.toString());
+        return stringBuilder.toString();
+    }
+
+    public String aumentarOcupacaoHoteis(String nome,Integer novo_valor)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("UPDATE hoteis SET ocupacao = ");
         stringBuilder.append(novo_valor);
         stringBuilder.append(" WHERE nome = " + nome);
         System.out.println(stringBuilder.toString());
