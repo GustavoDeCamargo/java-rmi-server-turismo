@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AeroManager {
@@ -57,10 +58,12 @@ public class AeroManager {
         return voos;
     }
 
-    public Integer efetuarCompraPassagem(Passagem passagem) throws SQLException {
+    public void efetuarCompraPassagem(Passagem passagem) throws SQLException {
         ResultSet rs = repository.executeQuery(mquery.getIdVooPeloNome(passagem.getVoo().getNome()));
         Integer voo_id = rs.getInt("id");
-        return 0;
+        repository.executeUpdate(mquery.compraPassagem(new Date().toString(),voo_id,passagem.getCliente()));
+        Integer vendidos = repository.executeQuery(mquery.getVendidosPeloNome(passagem.getVoo().getNome())).getInt("vendidos");
+        repository.executeUpdate(mquery.aumentarVendidosVoo(passagem.getVoo().getNome(),vendidos+1));
     }
 
     private List<Voo> preencheVoos(ResultSet rs, Passagem passagem) throws SQLException {

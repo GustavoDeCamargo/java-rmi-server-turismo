@@ -169,4 +169,9 @@ public class ManagerQuery {
     {
         return "SELECT id from voo WHERE nome = " + nome;
     }
+
+    public String getVendidosPeloNome(String nome)
+    {
+        return "SELECT vendidos from voo WHERE nome = " + nome;
+    }
 }

@@ -12,6 +12,7 @@ public class Passagem implements Serializable {
     private Date data;
     private Double preco;
     private Integer numero_pessoas;
+    private String cliente;
 
 
     public Integer getId() {
@@ -52,5 +53,13 @@ public class Passagem implements Serializable {
 
     public void setNumero_pessoas(Integer numero_pessoas) {
         this.numero_pessoas = numero_pessoas;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 }
