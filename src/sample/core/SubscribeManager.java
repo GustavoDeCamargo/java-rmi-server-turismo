@@ -177,7 +177,47 @@ public class SubscribeManager {
                     }
                     break;
                 case 3:
+                    //Passagens
+                    p = new Passagem();
+                    v = new Voo(null, i.getOrigem(), i.getDestino(), null, null, null);
+                    p.setVoo(v);
+                    p.setPreco(i.getPreco_maximo());
+                    voos = appManager.getAeroManager().consultarVoos(p);
 
+                    max = -1, count=0;
+                    for (j = 0; j<voos.size();j++) {
+                        Voo voo = voos.get(j);
+                        if(voo.getId() <= i.getId_checado()) {
+                            count++;
+                        }
+                        if (voo.getId() > max)
+                            max = voo.getId();
+                        // TODO PRECO DO VOO NO RETORNO
+                    }
+
+                    // Hospedagens
+                    hoteis = appManager.getHotelManager().getHoteisPeloLocal(i.getDestino());
+                    min = 999999;
+                    counth=0;
+                    max = -1;
+                    for (Hotel h:hoteis)
+                    {
+                        if(h.getId() <= i.getId_checado())
+                        {
+                            counth++;
+                        }
+                        if(h.getPreco() < min)
+                            min = h.getPreco();
+                        if (h.getId() > max)
+                            max = h.getId();
+                    }
+
+                    this.atualizarIdChecadoInteresse(i,max);
+
+                    if(hoteis.size() - counth > 0 && voos.size() - count > 0){
+                        notificarCliente(i.getRef_cliente(), " encontramos seu pacote ideal");
+                    }
+                    break;
             }
         }
     }
