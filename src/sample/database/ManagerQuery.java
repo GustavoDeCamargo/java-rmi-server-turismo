@@ -125,7 +125,7 @@ public class ManagerQuery {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("UPDATE voos SET vendidos = ");
         stringBuilder.append(novo_valor);
-        stringBuilder.append(" WHERE nome = " + nome);
+        stringBuilder.append(" WHERE nome = '" + nome + "'");
         System.out.println(stringBuilder.toString());
         return stringBuilder.toString();
     }
@@ -167,12 +167,12 @@ public class ManagerQuery {
 
     public String getIdVooPeloNome(String nome)
     {
-        return "SELECT id from voo WHERE nome = " + nome;
+        return "SELECT id from voos WHERE nome = '" + nome + "'";
     }
 
     public String getVendidosPeloNome(String nome)
     {
-        return "SELECT vendidos from voo WHERE nome = " + nome;
+        return "SELECT vendidos from voos WHERE nome = '" + nome + "'";
     }
 
     public String getAllVoos()

@@ -54,8 +54,10 @@ public class TrivagoManager {
     }
 
     public List<Hotel> getHoteisPeloLocal(String local) throws SQLException {
-        ResultSet rs = repository.executeQuery("SELECT * FROM hoteis WHERE local = "
-                + repository.executeQuery(mquery.getIDCidadePeloNome(local)).getInt("id"));
+        String query = "SELECT * FROM hoteis WHERE local = "
+                + repository.executeQuery(mquery.getIDCidadePeloNome(local)).getInt("id");
+        System.out.println(query);
+        ResultSet rs = repository.executeQuery(query);
         List<Hotel> hoteis = new ArrayList<>();
 
         while(rs.next())

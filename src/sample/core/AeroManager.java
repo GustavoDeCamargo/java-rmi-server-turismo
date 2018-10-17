@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static sample.Main.appManager;
+
 public class AeroManager {
     private Repository repository;
     private ManagerQuery mquery;
@@ -91,6 +93,7 @@ public class AeroManager {
             v.setVendidos(rs.getInt("vendidos"));
             v.setData_ida(rs.getString("data_ida"));
             v.setData_volta(rs.getString("data_volta"));
+            v.setPreco(rs.getDouble("preco"));
             if (!get_all) {
                 v.setOrigem(passagem.getVoo().getOrigem());
                 v.setDestino(passagem.getVoo().getDestino());

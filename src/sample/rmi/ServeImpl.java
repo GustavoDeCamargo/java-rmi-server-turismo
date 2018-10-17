@@ -70,4 +70,13 @@ public class ServeImpl extends UnicastRemoteObject implements InterfaceServ {
         }
         return cidades;
     }
+
+    @Override
+    public void comprarPassagem(Passagem p) throws RemoteException {
+        try {
+            appManager.getAeroManager().efetuarCompraPassagem(p);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

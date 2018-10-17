@@ -25,6 +25,7 @@ public interface InterfaceServ extends Remote  {
 
     Retorno consultar(String tipoConsulta,Passagem passagem) throws RemoteException;
 
+    public void comprarPassagem(Passagem p) throws RemoteException;
 
     List<String> GetCidades() throws RemoteException;
 }

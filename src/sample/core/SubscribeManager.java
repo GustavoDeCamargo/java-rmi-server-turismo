@@ -108,7 +108,7 @@ public class SubscribeManager {
 
     public void checarInteresses() throws SQLException, RemoteException, NotBoundException {
         List<Interesse> interesses = getAllInteresses();
-
+        double min;
         for (Interesse i: interesses)
         {
             Integer tipo_interesse = i.getTipo_interesse();
@@ -123,7 +123,7 @@ public class SubscribeManager {
                     p.setPreco(i.getPreco_maximo());
                     System.out.println(v.getOrigem() + v.getDestino());
                     List<Voo> voos = appManager.getAeroManager().consultarVoos(p);
-                    double min;
+
                     for (Voo voo:voos) {
                         System.out.println(voo.getNome());
                         // TODO PRECO DO VOO NO RETORNO
@@ -137,8 +137,20 @@ public class SubscribeManager {
                 case 2:
                     // Hospedagens
                     List<Hotel> hoteis = appManager.getHotelManager().getHoteisPeloLocal(i.getDestino());
-                    System.out.println(hoteis);
+                    min = 999999;
+                    for (Hotel h:hoteis)
+                    {
+                        if(h.getPreco() < min)
+                            min = h.getPreco();
+                    }
+                    if(hoteis.size() > 0)
+                    {
+                        notificarCliente(i.getNome_cliente(),
+                                "Temos disponível um hotel para " + i.getDestino() +
+                        " por apenas R$" + min);
+                    }
                     break;
+                case 3:
 
             }
         }
