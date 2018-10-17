@@ -70,8 +70,9 @@ public class ConfigurarController {
                 Integer.parseInt(capacidadeVoo.getText()),
                 dataIdaPicker.getValue().toString(),
                 dataVoltaPicker.getValue().toString());
-
-        appManager.getAeroManager().cadastrarVoo(voo);
+        synchronized(this) {
+            appManager.getAeroManager().cadastrarVoo(voo);
+        }
     }
 
     public void cadastrarHospedagem () throws SQLException, RemoteException, NotBoundException {
@@ -81,8 +82,10 @@ public class ConfigurarController {
                 Integer.parseInt(capacidadeHotel.getText()),
                 Double.parseDouble(precoDiaria.getText()));
 
-        appManager.getHotelManager().cadastrarHospedagem(hotel1);
-    }
+        synchronized(this) {
+            appManager.getHotelManager().cadastrarHospedagem(hotel1);
+        }
+        }
 
 }
 
